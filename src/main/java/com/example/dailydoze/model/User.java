@@ -23,12 +23,12 @@ public class User {
 
     private String password;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)//создаем связь между пользователем и ролью то есть связываем
     @JoinTable(name = "users_role", joinColumns = @JoinColumn(name = "cust_id",referencedColumnName = "id"),
     inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
     Set<Role> roles = new HashSet<>();
 
-
-
-
+    public void setRole(Role roles) {
+        this.roles.add(roles);
+    }
 }
