@@ -26,21 +26,23 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-        String redirectURL = null;
+        String redirectUrl = null;
         if (authentication.getPrincipal() instanceof DefaultOAuth2User) {
             DefaultOAuth2User userDetails = (DefaultOAuth2User) authentication.getPrincipal();
-            String username = userDetails.getAttribute("email")
-                    != null ? userDetails.getAttribute("email") :
-                    userDetails.getAttribute("login") + "@gmail.com";
+            String password = authentication.getCredentials().toString();
+            System.out.println(password);
+            String username = userDetails.getAttribute("email") != null ? userDetails.getAttribute("email") : userDetails.getAttribute("login") + "@gmail.com";
             if (userRepository.findByEmail(username) == null) {
                 UserRegisteredDTO user = new UserRegisteredDTO();
                 user.setEmail_id(username);
-                user.setName(userDetails.getAttribute("email")
-                        != null?userDetails.getAttribute("emial"):userDetails.getAttribute("login"));
+                user.setName(userDetails.getAttribute("email") != null ? userDetails.getAttribute("email") : userDetails.getAttribute("login"));
+                user.setPassword(password);
+                user.setRole("USER");
+                userService.save(user);
+                System.out.println(user.toString()  );
             }
-
         }
-        redirectURL = "/dashboard";
-        new DefaultRedirectStrategy().sendRedirect(request,response,redirectURL);
+        redirectUrl = "/dashboard";
+        new DefaultRedirectStrategy().sendRedirect(request, response, redirectUrl);
     }
 }

@@ -21,15 +21,13 @@ public class DashboardController {
     @GetMapping
     public String displayDashboard(Model model){
         SecurityContext securityContext = SecurityContextHolder.getContext();
-        if(securityContext.getAuthentication().getPrincipal() instanceof DefaultOAuth2User){
+        if(securityContext.getAuthentication().getPrincipal() instanceof DefaultOAuth2User) {
             DefaultOAuth2User user = (DefaultOAuth2User) securityContext.getAuthentication().getPrincipal();
-            model.addAttribute("userDetails",
-                    user.getAttribute("name")!=null ?user.getAttribute("name"):user.getAttribute("login"));
-        }
-        else{
+            model.addAttribute("userDetails", user.getAttribute("name")!= null ?user.getAttribute("name"):user.getAttribute("login"));
+        }else {
             User user = (User) securityContext.getAuthentication().getPrincipal();
             com.example.dailydoze.model.User users = userRepository.findByEmail(user.getUsername());
-            model.addAttribute("userDetails",users.getName());
+            model.addAttribute("userDetails", users.getName());
         }
         return "dashboard";
     }

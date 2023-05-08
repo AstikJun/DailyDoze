@@ -25,7 +25,7 @@ public class DefaultUserServiceImpl implements DefaultUserService {
     @Autowired
     private RoleRepository roleRepository;
 
-    private BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+    private final BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
 
     @Override
@@ -35,7 +35,7 @@ public class DefaultUserServiceImpl implements DefaultUserService {
         com.example.dailydoze.model.User user = new com.example.dailydoze.model.User();
         user.setEmail(userRegisteredDTO.getEmail_id());
         user.setName(userRegisteredDTO.getName());
-        user.setPassword(user.getPassword());
+        user.setPassword(bCryptPasswordEncoder.encode(userRegisteredDTO.getPassword()));
         user.setRole(role);
 
         return userRepository.save(user);
@@ -47,7 +47,7 @@ public class DefaultUserServiceImpl implements DefaultUserService {
         if (user == null) {
             throw new UsernameNotFoundException("Invalid username or password");
         }
-        return new User(user.getEmail(), user.getPassword(), mapRolesToAuthorities(user.getRoles()));
+        return new User(user.getEmail(), user.getPassword(), mapRolesToAuthorities(user.getRole()));
     }
 
     private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Set<Role> roles) {
