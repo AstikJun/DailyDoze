@@ -3,6 +3,7 @@ package com.example.dailydoze.controller;
 import com.example.dailydoze.dto.UserLoginDTO;
 import com.example.dailydoze.repository.UserRepository;
 import com.example.dailydoze.service.DefaultUserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,12 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/login")
+@RequiredArgsConstructor
 public class LoginController {
-    @Autowired
-    private DefaultUserService userService;
-
-    @Autowired
-    UserRepository userRepository;
+    private final DefaultUserService userService;
+    private final UserRepository userRepository;
 
 
     @ModelAttribute("user")

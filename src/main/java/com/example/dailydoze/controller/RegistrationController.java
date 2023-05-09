@@ -3,6 +3,7 @@ package com.example.dailydoze.controller;
 import com.example.dailydoze.dto.UserRegisteredDTO;
 import com.example.dailydoze.service.DefaultUserService;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -11,9 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("registration")
+
 public class RegistrationController {
 
-    private DefaultUserService userService;
+    private final DefaultUserService userService;
 
     public RegistrationController(DefaultUserService userService) {
         super();

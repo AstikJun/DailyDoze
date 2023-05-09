@@ -16,11 +16,8 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
     private String name;
-
     private String email;
-
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)//создаем связь между пользователем и ролью то есть связываем

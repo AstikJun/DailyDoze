@@ -4,6 +4,7 @@ import com.example.dailydoze.dto.UserRegisteredDTO;
 import com.example.dailydoze.model.Role;
 import com.example.dailydoze.repository.RoleRepository;
 import com.example.dailydoze.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -18,13 +19,10 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class DefaultUserServiceImpl implements DefaultUserService {
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private RoleRepository roleRepository;
-
+    private final UserRepository userRepository;
+    private final  RoleRepository roleRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
 

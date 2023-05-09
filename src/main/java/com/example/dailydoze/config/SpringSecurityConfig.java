@@ -1,6 +1,7 @@
 package com.example.dailydoze.config;
 
 import com.example.dailydoze.service.DefaultUserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,13 +16,10 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SpringSecurityConfig {
-
-    @Autowired
-    private DefaultUserService userDetailsService;
-
-    @Autowired
-    AuthenticationSuccessHandler successHandler;
+    private final DefaultUserService userDetailsService;
+    private final AuthenticationSuccessHandler successHandler;
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder(){

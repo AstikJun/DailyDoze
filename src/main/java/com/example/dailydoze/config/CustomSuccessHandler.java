@@ -4,6 +4,7 @@ import com.example.dailydoze.dto.UserRegisteredDTO;
 import com.example.dailydoze.repository.UserRepository;
 import com.example.dailydoze.service.DefaultUserService;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
@@ -17,12 +18,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Component
+@RequiredArgsConstructor
 public class CustomSuccessHandler implements AuthenticationSuccessHandler {
-    @Autowired
-    UserRepository userRepository;
-
-    @Autowired
-    DefaultUserService userService;
+    private final UserRepository userRepository;
+    private final DefaultUserService userService;
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {

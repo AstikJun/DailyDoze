@@ -9,8 +9,6 @@ public class UserRegisteredDTO {
 
     private String name;
     private String email_id;
-
     private String password;
-
-    String role;
+    private String role;
 }

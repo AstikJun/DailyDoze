@@ -1,0 +1,21 @@
+version: '3.2'
+services:
+  psqldbserver:
+    image: postgres:11.4-alpine
+    container_name: psqldbserver
+    ports:
+      - 5433:5432
+    networks:
+      - net-test
+    environment:
+      POSTGRES_DB: dailydoze
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
+    volumes:
+      - psqldata:/var/lib/postgresql
+
+volumes:
+  psqldata:
+networks:
+  net-test:
+    driver: bridge
