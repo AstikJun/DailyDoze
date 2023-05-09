@@ -1,9 +1,7 @@
 package com.example.dailydoze.controller;
 
 import com.example.dailydoze.dto.UserRegisteredDTO;
-import com.example.dailydoze.service.DefaultUserService;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import com.example.dailydoze.service.userService.DefaultUserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;

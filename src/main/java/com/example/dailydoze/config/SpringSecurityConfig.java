@@ -1,8 +1,7 @@
 package com.example.dailydoze.config;
 
-import com.example.dailydoze.service.DefaultUserService;
+import com.example.dailydoze.service.userService.DefaultUserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;

@@ -1,11 +1,10 @@
-package com.example.dailydoze.service;
+package com.example.dailydoze.service.userService;
 
 import com.example.dailydoze.dto.UserRegisteredDTO;
 import com.example.dailydoze.model.Role;
 import com.example.dailydoze.repository.RoleRepository;
 import com.example.dailydoze.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
