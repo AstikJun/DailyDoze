@@ -1,13 +1,19 @@
 package com.example.dailydoze.bootstrap;
 
+import antlr.BaseAST;
 import com.example.dailydoze.model.*;
 import com.example.dailydoze.repository.*;
 
+
+
+import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 @Component
+@RequiredArgsConstructor
 public class MainBootstrap implements CommandLineRunner {
 
     private final UserRepository userRepository;
@@ -17,17 +23,10 @@ public class MainBootstrap implements CommandLineRunner {
     private final CalendarRepository  calendarRepository;
     private final MeasurementRepository measurementRepository;
     private final RoleRepository roleRepository;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder= new BCryptPasswordEncoder();
 
 
-    public MainBootstrap(UserRepository userRepository, ProfileRepository profileRepository, HabitRepository habitRepository, HabitTypeRepository habitTypeRepository, CalendarRepository calendarRepository, MeasurementRepository measurementRepository, RoleRepository roleRepository, UserRepository userRepository1) {
-        this.userRepository = userRepository;
-        this.profileRepository = profileRepository;
-        this.habitRepository = habitRepository;
-        this.habitTypeRepository = habitTypeRepository;
-        this.calendarRepository = calendarRepository;
-        this.measurementRepository = measurementRepository;
-        this.roleRepository = roleRepository;
-    }
+
 
     @Override
     public void run(String... args) throws Exception {
@@ -39,7 +38,7 @@ public class MainBootstrap implements CommandLineRunner {
         User user = new User();
         user.setRole(role);
         user.setName("Astan");
-        user.setPassword("12345");
+        user.setPassword(bCryptPasswordEncoder.encode("12345"));
         user.setEmail("serikovastik@gmail.com");
         userRepository.save(user);
 
