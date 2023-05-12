@@ -31,7 +31,7 @@
   .profile-container{
     background: #000;
     font-family: 'Nunito', sans-serif;
-    padding: 80px 50px;
+    padding: 40px 50px;
     border-radius: 20px;
   }
   .form-icon {
@@ -45,16 +45,7 @@
     border-radius: 50px;
     box-shadow: 7px 7px 10px #cbced1, -7px -7px 10px #fff;
   }
-  button {
-    background-color: #000;
-    border-radius: 50px;
-    font-size: 55px;
-    text-align: center;
-    width: 110px;
-    height: 100px;
-    margin: 0 auto 15px;
-    border-radius: 50px;
-  }
+
   input[type="file" i]::-webkit-file-upload-button {
     background-color: #ac40ab !important;
     color: #000 !important;
@@ -67,6 +58,9 @@
     text-align: center;
 
   }
+  .user-photo{
+    margin-bottom:20px;
+  }
   .inputfile {
     width:0.1px;
     height: 0.1px;
@@ -75,7 +69,7 @@
     position: absolute;
     z-index: -1;
   }
-  label{
+  .image{
     background-color: #ac40ab !important;
     color: #000;
     font-weight: bold;
@@ -84,16 +78,43 @@
     padding: 5px 30px;
 
   }
+
   .form-control {
     background: #f0f0f0;
     border: none;
     border-radius: 30px;
     padding: 0 20px 0 45px;
+    margin-bottom: 20px;
     height: 40px;
     transition: all 0.3s ease 0s;
     width: 100%;
   }
+  .control{
+    border-radius: 20px;
+    background-color: #f0f0f0;
+    color: #000;
+    padding-left: 45px;
+    padding-top: 10px ;
 
+  }
+  .a {
+    border-radius: 20px;
+    font-size: 16px;
+  }
+  .s{
+    width: 50%;
+    line-height:40px;
+    vertical-align: center;
+  }
+  .btn {
+    background-color: #ac40ab;
+    color: #000;
+    font-weight: bold;
+    border-radius: 20px;
+    width: 100px;
+    margin: 10px 40px
+
+  }
 
   </style>
 <body>
@@ -113,30 +134,60 @@
     </nav>
     <div class="d-flex justify-content-center">
       <div class="profile-container">
+        <form action="" method="post">
         <div class="user-photo">
           <p class="add-photo">
-            <input type="file" id="input_file" name="file" class="inputfile">
-            <label for="input_file"><span>add photo</span></label>
+            <input type="file" id="input_file" name="file" class="inputfile" data-multile-caption="{count}" multiple />
+            <label for="input_file" class="image"><span>add photo</span></label>
               <div class="form-icon"><i class="fa fa-user"></i></div>
           </p>
         </div>
           <input class="form-control" type="text" required name="first name" placeholder="Name">
-        <input class="namebirth" type="date" required="date" name="birthday" placeholder="date of birth">
-        <p>
-          <label class="form-control" for="sex">sex</label>
-          <select id= "sex" class="a" name="sex">
+        <input class="form-control" type="date" data-date="" data-date-format="DD MMMM YYYY" value="2023-12-05" name="date" placeholder="date of birth">
+        <div class="d-flex justify-content-between align-items-center">
+          <label class="form-control s" for="sex">Sex</label>
+          <p><select id= "sex" class="a" name="sex">
           <option value="male">Male</option>
           <option value="female">Female</option>
           </select>
+            </p>
+        </div>
         <input class="form-control" type="number" required name="weight" placeholder="Weight">
-          <textarea name="information" cols="63" rows="10" placeholder="Введите вашу информацию"></textarea>
-        <p class="button1">
-          <button class="shade" type="submit">Save</button></p>
-        <p class="button2"><input class="shade" type="reset">
-        </p>
+        <textarea class="control" name="information" cols="55" rows="10" placeholder="About me"></textarea>
+
+          <div class="d-flex justify-content-between">
+          <button class="btn" type="submit">Save</button>
+            <input class="btn" type="reset" value="Reset">
+          </div>
+        </form>
       </div>
     </div>
   </div>
+<script>
+  function ready()
+  {
+    let inputs=document.querySelectorAll('.inputfile');
+    Array.prototype.forEach.call(inputs, function(input)
+    {
+      let label = input.nextElementSibling,
+              labelVal= label.innerHTML;
+      input.addEventListener('change', function(e)
+      {
+        console.log(this.files);
+       let fileName = '';
+       if(this.files && this.files.length >1)
+         fileName = (this.getAttribute('data-multiple-caption') || '').replace('{count}',this.files.length++)
+        else
+        fileName =this.files[0].name;
 
+        if(fileName)
+          label.querySelector('span').innerHTML = fileName;
+        else
+          label.innerHTML = labelVal;
+      });
+    });
+  };
+  document.addEventListener("DOMContentLoaded", ready);
+</script>
 </body>
 </html>
