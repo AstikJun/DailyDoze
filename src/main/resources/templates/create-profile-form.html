@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        .form-container {
+            margin: auto;
+            margin-top: 50px;
+            max-width: 600px;
+            padding: 20px;
+            border: 1px solid #eee;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+
+        .form-container h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .form-container label {
+            font-weight: 500;
+        }
+
+        .form-container input[type="text"], .form-container input[type="email"], .form-container input[type="password"] {
+            width: 100%;
+            padding: 8px 16px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        .form-container .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            box-shadow: none;
+            color: #fff;
+            font-weight: 500;
+            padding: 8px 16px;
+            margin-top: 20px;
+        }
+
+        .form-container .btn-primary:hover {
+            background-color: #0069d9;
+            border-color: #0062cc;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="form-container">
+        <h2>Create Profile</h2>
+        <form action="#" th:action="@{/profile/save}"th:object="${profile}" method="POST" enctype="multipart/form-data">
+
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" name="name" required th:field="*{name}">
+            </div>
+            <div class="form-group">
+                <select name="language">
+                    <option th:each="lang : ${T(com.example.dailydoze.enums.Languages).values()}"
+                            th:value="${lang}" th:text="${lang.displayValue}"></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <select name="theme">
+                    <option th:each="theme : ${T(com.example.dailydoze.enums.Themes).values()}"
+                            th:value="${theme}" th:text="${theme.displayValue}"></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="profileImage">Profile Image</label>
+                <input type="file" class="form-control" id="profileImage" name="profileImage" required  th:field="*{profileImage}">
+            </div>
+            <button type="submit" class="btn btn-primary">Create Profile</button>
+        </form>
+    </div>
+</div>
+<!--<h1>Create Profile</h1>-->
+<!--<form action="#" th:action="@{/profile/save}" th:object="${profile}" method="post" enctype="multipart/form-data">-->
+<!--    <div>-->
+<!--        <label>Name:</label>-->
+<!--        <input type="text" th:field="*{name}">-->
+<!--    </div>-->
+<!--    <div>-->
+<!--        <label>Language:</label>-->
+<!--        <input type="text" th:field="*{language}">-->
+<!--    </div>-->
+<!--    <div>-->
+<!--        <label>Theme:</label>-->
+<!--        <input type="text" th:field="*{theme}">-->
+<!--    </div>-->
+<!--    <div>-->
+<!--        <label>Profile Image:</label>-->
+<!--        <input type="file" th:field="*{profileImage}">-->
+<!--    </div>-->
+<!--    <button type="submit">Save</button>-->
+<!--</form>-->
+</body>
+</html>

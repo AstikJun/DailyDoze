@@ -2,6 +2,7 @@ package com.example.dailydoze.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -35,6 +36,7 @@ public class User {
     @JoinTable(name = "users_role", joinColumns = @JoinColumn(name = "cust_id",referencedColumnName = "id"),
     inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
     Set<Role> roles = new HashSet<>();
+
 
 
 
