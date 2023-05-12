@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -38,6 +39,17 @@ public class DefaultUserServiceImpl implements DefaultUserService {
 
         return userRepository.save(user);
     }
+
+    @Override
+    public com.example.dailydoze.model.User getUserById(Long id) {
+        return userRepository.findById(id).orElseThrow(()-> new NoSuchElementException("User with id "+id +" doesnt exist!"));
+    }
+
+    @Override
+    public com.example.dailydoze.model.User save(com.example.dailydoze.model.User user) {
+        return userRepository.save(user);
+    }
+
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {

@@ -39,7 +39,8 @@ public class SpringSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/registration/**","/login/**").permitAll()
+                .antMatchers("/registration/**","/login/**",
+                        "/profile/create","/profile/create","/profile/save","/profile/{id}").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login").successHandler(successHandler)

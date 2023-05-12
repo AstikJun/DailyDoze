@@ -1,7 +1,11 @@
 package com.example.dailydoze.model;
 
+import com.example.dailydoze.enums.Languages;
+import com.example.dailydoze.enums.Themes;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 
@@ -16,20 +20,25 @@ public class Profile {
     @Column(name = "profile_id")
     private Long id;
 
-    @Column(name = "icon")
-    private String icon;
+
 
     @Column(name = "name")
     private String name;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "language")
-    private String language;
+    private Languages language;
 
     @Column(name = "theme")
-    private String theme;
+    @Enumerated(EnumType.STRING)
+    private Themes theme;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
+
+    @Column(name = "profile_image")
+    @Transient
+    private MultipartFile profileImage;
 
 }

@@ -1,10 +1,9 @@
 package com.example.dailydoze.bootstrap;
 
-import antlr.BaseAST;
+import com.example.dailydoze.enums.Languages;
+import com.example.dailydoze.enums.Themes;
 import com.example.dailydoze.model.*;
 import com.example.dailydoze.repository.*;
-
-
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
@@ -23,7 +22,8 @@ public class MainBootstrap implements CommandLineRunner {
     private final CalendarRepository  calendarRepository;
     private final MeasurementRepository measurementRepository;
     private final RoleRepository roleRepository;
-    private final BCryptPasswordEncoder bCryptPasswordEncoder= new BCryptPasswordEncoder();
+
+    private final BCryptPasswordEncoder passwordEncoder;
 
 
 
@@ -38,16 +38,16 @@ public class MainBootstrap implements CommandLineRunner {
         User user = new User();
         user.setRole(role);
         user.setName("Astan");
-        user.setPassword(bCryptPasswordEncoder.encode("12345"));
+        user.setPassword(passwordEncoder.encode("12345"));
         user.setEmail("serikovastik@gmail.com");
         userRepository.save(user);
 
 
         Profile profile = new Profile();
         profile.setName("John Doe");
-        profile.setIcon("user.png");
-        profile.setLanguage("en");
-        profile.setTheme("dark");
+//        profile.setProfileImage("static/img/unnamed.png");
+        profile.setLanguage(Languages.Russian);
+        profile.setTheme(Themes.Dark);
         profile.setUser(user);
         profileRepository.save(profile);
 

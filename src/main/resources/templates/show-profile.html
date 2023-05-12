@@ -1,0 +1,61 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Profile</title>
+  <style>
+    body {
+      background-color: #f2f2f2;
+    }
+    .profile-card {
+      margin: auto;
+      max-width: 400px;
+      padding: 20px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px #dcdcdc;
+    }
+    h1 {
+      text-align: center;
+      font-size: 36px;
+      margin-top: 0;
+    }
+    img {
+      display: block;
+      margin: auto;
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 50%;
+      box-shadow: 0px 0px 10px #dcdcdc;
+      margin-bottom: 20px;
+    }
+    h2 {
+      font-size: 28px;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    p {
+      font-size: 20px;
+      margin: 0;
+      padding: 10px 0;
+      border-bottom: 1px solid #dcdcdc;
+    }
+    p:last-child {
+      border-bottom: none;
+    }
+    strong {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+<div class="profile-card">
+  <img th:src="@{'resourses/static/img/'+ ${profile.profileImage}}" th:alt="${profile.name}"/>
+  <h2 th:text="${profile.name}"></h2>
+  <p><strong>Language:</strong> <span th:text="${profile.language}"></span></p>
+  <p><strong>Theme:</strong> <span th:text="${profile.theme}"></span></p>
+</div>
+</body>
+</html>
